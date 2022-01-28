@@ -8,7 +8,7 @@ import { useUser } from "../context/UserContext"
 import withAuth from "../hoc/withAuth"
 import { storageSave } from "../utils/storage"
 
-const Profile = () => {
+const ProfileView = () => {
 
     //getting curr user from context using my useUser hook - to pass as prop to ProfileHeader and OrderHistory below, and use in useEffect to set user
     const { user, setUser } = useUser()
@@ -42,4 +42,4 @@ const Profile = () => {
 }
 
 //wraps the Profile view in the withAuth higher-order-component to check if user is logged in before showing this view
-export default withAuth(Profile)
+export default withAuth(ProfileView)

@@ -1,3 +1,6 @@
+
+//NOTE: renamed from the demo Orders view
+
 import OrderCoffeeButton from "../components/Orders/OrdersCoffeeButton"
 import withAuth from "../hoc/withAuth"
 import OrdersForm from "../components/Orders/OrdersForm"
@@ -34,7 +37,7 @@ const COFFEES = [
     },
 ]
 
-const Orders = () => {
+const TranslationsView = () => {
     
     //local store to contain the chosen coffee - so it can be responsive and update the page showing "you're buying x coffee"
     const [coffee, setCoffee] = useState(null)
@@ -94,4 +97,4 @@ const Orders = () => {
 }
 
 //wraps the Order view in the withAuth higher-order-component to check if user is logged in before showing this view
-export default withAuth(Orders)
+export default withAuth(TranslationsView)
