@@ -3,36 +3,30 @@ import { useState } from "react"
 import { userById } from "../../api/user"
 import { useUser } from "../../context/UserContext"
 
-const OrdersForm = ({onOrder}) => {
+const TranslationInputForm = ({translateHandler}) => {
 
     const translationInputConfig = {
         required: true,
         maxLength: 40,
     }
 
-    //include the apierror local state thing from LoginForm too
+    //form handler for translation input
     const {register, handleSubmit, formState: {errors}} = useForm()
 
+    //handles showing the user that a translation is on the way
     const [translating, setTranslating] = useState(false)
-    const [loading, setLoading] = useState(false)
 
+    //user state access from UserContext
     const {user, setUser} = useUser()
 
-    //passes the orderNotes collected below (which are responsive) on up to the props function this comp got from its parent
+    //passes translation input upwards to parent for use in the translateHandler prop function
     const onSubmit = async ({translationInput}) => {
         setTranslating(true)   
-        await onOrder(translationInput) //await because i will add api call in parent onOrder function 
+        await translateHandler(translationInput)
         setTranslating(false)
     }
 
-    //Test method
-    const getUser = async() => {
-        const [error, getUser] = await userById(user.id)
-        console.log(getUser.id, getUser.username, getUser.translations)
-    }
-
-
-    //render any input errors to the screen. is called on every re-render and then re-checks if any error messages exist.
+    //render any user input errors to the screen. is called automatically on every re-render and then re-checks if any error messages exist.
     const showErrorMessage = (() => {
         if (!errors.translationInput){
             return null
@@ -47,9 +41,7 @@ const OrdersForm = ({onOrder}) => {
     })()
 
     return (
-       
         <form onSubmit={handleSubmit(onSubmit)}>
-            <button onClick={getUser}>test get</button>
             <fieldset>
                 <label htmlFor="translationInput">Add text here to translate</label>
                 <input type='text' {...register('translationInput', translationInputConfig)} placeholder="Your translation here"/>   
@@ -63,4 +55,4 @@ const OrdersForm = ({onOrder}) => {
     )
 }
 
-export default OrdersForm
+export default TranslationInputForm

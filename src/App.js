@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom'
 import LoginView from './views/LoginView';
 import ProfileView from './views/ProfileView';
-import TranslationsView from './views/TranslationView';
+import TranslationView from './views/TranslationView';
 import Navbar from './components/Navbar/Navbar';
 import NotFound from './components/NotFound/NotFound';
 
@@ -20,7 +20,7 @@ function App() {
        <Navbar/>
         <Routes>
           <Route path='/' element={ <LoginView />} />
-          <Route path='/translations' element={ <TranslationsView/> } />
+          <Route path='/translations' element={ <TranslationView/> } />
           <Route path='/profile' element={ <ProfileView />} />
           <Route path='*' element={<NotFound/>} />
         </Routes>

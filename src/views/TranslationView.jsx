@@ -1,9 +1,6 @@
-
-//NOTE: renamed from the demo Orders view
-
 import OrderCoffeeButton from "../components/Translation/OrdersCoffeeButton"
 import withAuth from "../hoc/withAuth"
-import OrdersForm from "../components/Translation/TranslationInputForm"
+import TranslationInputForm from "../components/Translation/TranslationInputForm"
 import { useState } from "react"
 import { useUser } from "../context/UserContext"
 import { orderAdd } from "../api/order"
@@ -11,10 +8,7 @@ import { storageSave } from "../utils/storage"
 import { STORAGE_KEY_USER } from "../const/storageKeys"
 import OrdersSummary from "../components/Translation/OrdersSummary"
 
-//NOTE: remember to add keys when you duplicate components, even without an explicit loop
-
 //this code is outside the component to avoid redeclarations when the comp re-renders. goes in array so we can use map() and only write the event handler once
-
 const COFFEES = [ //use this as baseline for the sign language image handlign?
     {
         id:1,
@@ -38,7 +32,7 @@ const COFFEES = [ //use this as baseline for the sign language image handlign?
     },
 ]
 
-const TranslationsView = () => {
+const TranslationView = () => {
     
     //local store to contain the chosen coffee - so it can be responsive and update the page showing "you're buying x coffee"
     const [coffee, setCoffee] = useState(null)
@@ -50,7 +44,7 @@ const TranslationsView = () => {
     const {user, setUser} = useUser()
     
     //event handler for the order button in OrdersForm child. creates a complete order and http's it off
-    const handleOrderClicked = async translationInput => {
+    const handleTranslateClicked = async translationInput => {
         // if (!coffee){
         //     alert('Please select a coffee')
         //     return
@@ -92,8 +86,8 @@ const TranslationsView = () => {
             <section id="coffee-options">
                 {availableCoffees}
             </section>
-            <section id='order-notes'>
-                <OrdersForm onOrder={handleOrderClicked} />
+            <section id='translate-input'>
+                <TranslationInputForm translateHandler={handleTranslateClicked} />
                 {apiError && <p>{apiError}</p>}
             </section>
 
@@ -103,4 +97,4 @@ const TranslationsView = () => {
 }
 
 //wraps the Order view in the withAuth higher-order-component to check if user is logged in before showing this view
-export default withAuth(TranslationsView)
+export default withAuth(TranslationView)
