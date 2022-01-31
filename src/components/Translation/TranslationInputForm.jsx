@@ -25,6 +25,7 @@ const OrdersForm = ({onOrder}) => {
         setTranslating(false)
     }
 
+    //Test method
     const getUser = async() => {
         const [error, getUser] = await userById(user.id)
         console.log(getUser.id, getUser.username, getUser.translations)
