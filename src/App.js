@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom'
 import LoginView from './views/LoginView';
 import ProfileView from './views/ProfileView';
-import TranslationsView from './views/TranslationsView';
+import TranslationsView from './views/TranslationView';
 import Navbar from './components/Navbar/Navbar';
 import NotFound from './components/NotFound/NotFound';
 

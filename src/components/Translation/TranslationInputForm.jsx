@@ -1,5 +1,7 @@
 import { useForm } from "react-hook-form"
 import { useState } from "react"
+import { userById } from "../../api/user"
+import { useUser } from "../../context/UserContext"
 
 const OrdersForm = ({onOrder}) => {
 
@@ -14,6 +16,7 @@ const OrdersForm = ({onOrder}) => {
     const [translating, setTranslating] = useState(false)
     const [loading, setLoading] = useState(false)
 
+    const {user, setUser} = useUser()
 
     //passes the orderNotes collected below (which are responsive) on up to the props function this comp got from its parent
     const onSubmit = async ({translationInput}) => {
@@ -21,6 +24,12 @@ const OrdersForm = ({onOrder}) => {
         await onOrder(translationInput) //await because i will add api call in parent onOrder function 
         setTranslating(false)
     }
+
+    const getUser = async() => {
+        const [error, getUser] = await userById(user.id)
+        console.log(getUser.id, getUser.username, getUser.translations)
+    }
+
 
     //render any input errors to the screen. is called on every re-render and then re-checks if any error messages exist.
     const showErrorMessage = (() => {
@@ -39,6 +48,7 @@ const OrdersForm = ({onOrder}) => {
     return (
        
         <form onSubmit={handleSubmit(onSubmit)}>
+            <button onClick={getUser}>test get</button>
             <fieldset>
                 <label htmlFor="translationInput">Add text here to translate</label>
                 <input type='text' {...register('translationInput', translationInputConfig)} placeholder="Your translation here"/>   

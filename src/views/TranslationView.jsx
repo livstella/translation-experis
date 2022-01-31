@@ -55,16 +55,16 @@ const TranslationsView = () => {
         //     alert('Please select a coffee')
         //     return
         // }
-        console.log(translationInput.trim())
-        // const [error, updatedUser] = await orderAdd(user, order)
-        // if (error !== null){
-        //     return
-        // }
-
-//WILL USE 2 BELOW LINES TO SYNC LOCAL KNOWLEDGE OF TRANSLATIONS WITH API
+        const [error, updatedUser] = await orderAdd(user, translationInput)
+        console.log(updatedUser)
+        if (error !== null){
+             return
+        }
+        //sync local knowledge of translations with api
         //exploit the fact that the response of post is the entire user object to sync our ui state (local storage) and context state (setUser) with server state
-            // setUser(updatedUser)
-            // storageSave(STORAGE_KEY_USER, updatedUser)
+        setUser(updatedUser)
+        storageSave(STORAGE_KEY_USER, updatedUser)
+        
     }
 
 
