@@ -1,20 +1,21 @@
 
 //NOTE: renamed from the demo Orders view
 
-import OrderCoffeeButton from "../components/Orders/OrdersCoffeeButton"
+import OrderCoffeeButton from "../components/Translation/OrdersCoffeeButton"
 import withAuth from "../hoc/withAuth"
-import OrdersForm from "../components/Orders/OrdersForm"
+import OrdersForm from "../components/Translation/TranslationInputForm"
 import { useState } from "react"
 import { useUser } from "../context/UserContext"
 import { orderAdd } from "../api/order"
 import { storageSave } from "../utils/storage"
 import { STORAGE_KEY_USER } from "../const/storageKeys"
-import OrdersSummary from "../components/Orders/OrdersSummary"
+import OrdersSummary from "../components/Translation/OrdersSummary"
 
 //NOTE: remember to add keys when you duplicate components, even without an explicit loop
 
 //this code is outside the component to avoid redeclarations when the comp re-renders. goes in array so we can use map() and only write the event handler once
-const COFFEES = [
+
+const COFFEES = [ //use this as baseline for the sign language image handlign?
     {
         id:1,
         name: 'Americano',
@@ -42,24 +43,28 @@ const TranslationsView = () => {
     //local store to contain the chosen coffee - so it can be responsive and update the page showing "you're buying x coffee"
     const [coffee, setCoffee] = useState(null)
 
+    //local state for errors in api call
+    const [apiError, setApiError] = useState(null)
+
     //getting user from the custom hook made in usercontext - passed to the api patch call in handleOrderClicked
     const {user, setUser} = useUser()
     
     //event handler for the order button in OrdersForm child. creates a complete order and http's it off
-    const handleOrderClicked = async orderNotes => {
-        if (!coffee){
-            alert('Please select a coffee')
-            return
-        }
-        const order = (coffee.name + ' ' + orderNotes).trim()
-        const [error, updatedUser] = await orderAdd(user, order)
-        if (error !== null){
-            return
-        }
+    const handleOrderClicked = async translationInput => {
+        // if (!coffee){
+        //     alert('Please select a coffee')
+        //     return
+        // }
+        console.log(translationInput.trim())
+        // const [error, updatedUser] = await orderAdd(user, order)
+        // if (error !== null){
+        //     return
+        // }
 
+//WILL USE 2 BELOW LINES TO SYNC LOCAL KNOWLEDGE OF TRANSLATIONS WITH API
         //exploit the fact that the response of post is the entire user object to sync our ui state (local storage) and context state (setUser) with server state
-        setUser(updatedUser)
-        storageSave(STORAGE_KEY_USER, updatedUser)
+            // setUser(updatedUser)
+            // storageSave(STORAGE_KEY_USER, updatedUser)
     }
 
 
@@ -89,6 +94,7 @@ const TranslationsView = () => {
             </section>
             <section id='order-notes'>
                 <OrdersForm onOrder={handleOrderClicked} />
+                {apiError && <p>{apiError}</p>}
             </section>
 
             {coffee && <OrdersSummary coffee={coffee}/>}
