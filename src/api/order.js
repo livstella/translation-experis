@@ -4,15 +4,19 @@ import { createHeaders } from "."
 const apiUrl = process.env.REACT_APP_API_URL
 
 
-//patch to update existing record, only the changed part (orders). 
-//Note the nice spread operator in the body that adds the new order to the array of existing orders
-export const orderAdd = async (user, newOrder) => {
+//patch to update existing record, only the changed part (translations). 
+//Note the spread operator in the body that adds the new translation to the array of existing translations
+export const orderAdd = async (user, newTranslation) => {
     try {
             const response = await fetch(`${apiUrl}/${user.id}`, {
                 method: 'PATCH',
                 headers: createHeaders(),
                 body: JSON.stringify({
-                    orders: [...user.orders, newOrder]
+                    //NN left orders here to avoid messing up the login page for now. remove them later
+                    orders: [...user.orders],
+                    translations: [...user.translations, {
+                        text: newTranslation,
+                        isDeleted: false}],
                 })
             })
             if (!response.ok){
