@@ -14,7 +14,9 @@ export const orderAdd = async (user, newTranslation) => {
                 body: JSON.stringify({
                     //NN left orders here to avoid messing up the login page for now. remove them later
                     orders: [...user.orders],
-                    translations: [...user.translations, newTranslation],
+                    translations: [...user.translations, {
+                        text: newTranslation,
+                        isDeleted: false}],
                 })
             })
             if (!response.ok){
