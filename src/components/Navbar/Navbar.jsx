@@ -9,10 +9,7 @@ const Navbar = () => {
 
     return (
         <nav>
-            <ul>
-                <li>Coffee orders</li>
-            </ul>
-            
+                     
             {user !== null && <ul>
                 <li>
                     <NavLink to='/translations'>TRANSLATIONS</NavLink>

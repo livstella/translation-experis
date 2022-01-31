@@ -75,9 +75,10 @@ const LoginForm = () => {
     
     //returns the actual component we call LoginForm
     return (
-        <>
+        <div className='login-component'>
             <h2>What's your name?</h2>
             <form onSubmit={handleSubmit(onSubmit)}>
+                <div className='form-wrapper'>
                 <fieldset>
                     <label htmlFor="username">Username</label>
                     <input
@@ -86,14 +87,16 @@ const LoginForm = () => {
                         {...register("username", usernameConfig)} 
                     />
                     {errorMessage}
+                    <button type="submit" disabled={loading}>Continue</button>
                 </fieldset>
 
-                <button type="submit" disabled={loading}>Continue</button>
+  
+                </div>
 
                 {loading && <p>Logging in...</p>}
                 {apiError && <p>{apiError}</p>}
             </form>
-        </>
+        </div>
     )
 }
 
