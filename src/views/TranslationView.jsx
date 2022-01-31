@@ -7,6 +7,7 @@ import { orderAdd } from "../api/order"
 import { storageSave } from "../utils/storage"
 import { STORAGE_KEY_USER } from "../const/storageKeys"
 import OrdersSummary from "../components/Translation/OrdersSummary"
+import TranslationOutput from "../components/Translation/TranslationOutput"
 
 //this code is outside the component to avoid redeclarations when the comp re-renders. goes in array so we can use map() and only write the event handler once
 const COFFEES = [ //use this as baseline for the sign language image handlign?
@@ -55,7 +56,6 @@ const TranslationView = () => {
              return
         }
         //sync local knowledge of translations with api
-        //exploit the fact that the response of post is the entire user object to sync our ui state (local storage) and context state (setUser) with server state
         setUser(updatedUser)
         storageSave(STORAGE_KEY_USER, updatedUser)
         
@@ -91,7 +91,10 @@ const TranslationView = () => {
                 {apiError && <p>{apiError}</p>}
             </section>
 
-            {coffee && <OrdersSummary coffee={coffee}/>}
+            {/* consider making an && check for this to appear */}
+            <section>
+                <TranslationOutput/>
+            </section>
         </>
     )
 }
