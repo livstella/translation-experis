@@ -25,7 +25,7 @@ const createUser = async (username) => {
             body: JSON.stringify({
                 username,
                 //NN left orders here to avoid messing up the login page for now. remove them later
-                orders: [],
+                // orders: [],
                 translations: []
             })
         })

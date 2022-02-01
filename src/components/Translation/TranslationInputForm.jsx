@@ -1,7 +1,5 @@
 import { useForm } from "react-hook-form"
 import { useState } from "react"
-import { userById } from "../../api/user"
-import { useUser } from "../../context/UserContext"
 import { useLatestTranslation } from "../../context/LatestTranslationContext"
 
 const TranslationInputForm = ({translateHandler}) => {
@@ -22,7 +20,6 @@ const TranslationInputForm = ({translateHandler}) => {
 
     //passes translation input upwards to parent for use in the translateHandler prop function
     const onSubmit = async ({translationInput}) => {
-        console.log(translationInput)
         setTranslating(true)   
         await translateHandler(translationInput)
         setTranslating(false)

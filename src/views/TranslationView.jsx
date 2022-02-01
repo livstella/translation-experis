@@ -8,6 +8,7 @@ import { storageSave } from "../utils/storage"
 import { STORAGE_KEY_USER } from "../const/storageKeys"
 import OrdersSummary from "../components/Translation/OrdersSummary"
 import TranslationOutput from "../components/Translation/TranslationOutput"
+import { FOCUSABLE_SELECTOR } from "@testing-library/user-event/dist/utils"
 
 //this code is outside the component to avoid redeclarations when the comp re-renders. goes in array so we can use map() and only write the event handler once
 const COFFEES = [ //use this as baseline for the sign language image handlign?
@@ -34,7 +35,7 @@ const COFFEES = [ //use this as baseline for the sign language image handlign?
 ]
 
 const TranslationView = () => {
-    
+
     //local store to contain the chosen coffee - so it can be responsive and update the page showing "you're buying x coffee"
     const [coffee, setCoffee] = useState(null)
 
@@ -46,15 +47,9 @@ const TranslationView = () => {
     
     //event handler for the order button in OrdersForm child. creates a complete order and http's it off
     const handleTranslateClicked = async translationInput => {
-        console.log('in view', translationInput)
-        console.log('user in view', user)
-        // if (!coffee){
-        //     alert('Please select a coffee')
-        //     return
-        // }
         const [error, updatedUser] = await orderAdd(user, translationInput)
-        console.log(error, updatedUser)
         if (error !== null){
+            setApiError(error)
              return
         }
         //sync local knowledge of translations with api
@@ -93,7 +88,6 @@ const TranslationView = () => {
                 {apiError && <p>{apiError}</p>}
             </section>
 
-            {/* consider making an && check for this to appear */}
             <section>
                 <TranslationOutput/>
             </section>

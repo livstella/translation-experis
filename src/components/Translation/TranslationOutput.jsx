@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useUser } from '../../context/UserContext';
 import { useEffect } from 'react';
 import { useLatestTranslation } from '../../context/LatestTranslationContext';
 
@@ -8,33 +7,32 @@ import { useLatestTranslation } from '../../context/LatestTranslationContext';
 const TranslationOutput = () => {
   
     //context for getting and setting the latest translation
-    const {user, setUser} = useUser()
-    const {latestTranslation, setLatestTranslation} = useLatestTranslation()
-    let userInput = latestTranslation
+    const {latestTranslation} = useLatestTranslation()
 
-    const imageNames = []
-    const [images, setImages] = useState(['one'])
-
+    //state for showing sing language images
+    const [images, setImages] = useState([null])
     
+    //list of images to display as a translation
+    const imageObjects = []
+
     const translate = () => { 
-    for (let letter of userInput){
-        imageNames.push(`img/${letter}.png`) // make objects instead and add in an id because letters can de duplicates
+    for (let index = 0; index < latestTranslation.length; index++){
+        let letter = latestTranslation[index]
+        imageObjects.push({image: `img/${letter}.png`,
+        id: index}) 
     }
-    console.log(imageNames)
-    setImages(imageNames.map(imagePath => {
-        return <img 
-        src={imagePath}
+    setImages(imageObjects.map(imageObject => {
+        return <img
+        src={imageObject.image}
         width='55'
-        key={imagePath}/>
+        key={imageObject.id}
+        />
     }))
-    console.log(images)
     }
 
     return <div>
-        <button onClick={translate}>test</button>
-      <h2>Your input in American sign language:</h2>
-      
-      {userInput}
+        <button onClick={translate}>TEST TRANSLATE</button>
+      <h2>Your text in American sign language:</h2>
       {images}
   </div>;
 };
