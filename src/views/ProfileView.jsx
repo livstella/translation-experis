@@ -23,7 +23,6 @@ const ProfileView = () => {
             if (error === null){
                 storageSave(STORAGE_KEY_USER, latestUser)
                 setUser(latestUser)
-                
             }
         }
 
@@ -35,7 +34,8 @@ const ProfileView = () => {
             <h1>Profile</h1>
             <ProfileHeader username={user.username}></ProfileHeader>
             <ProfileActions></ProfileActions>
-            <ProfileOrderHistory orders={user.orders}></ProfileOrderHistory>
+            {/* NN edited below to be translations to allow logging in without errors */}
+            <ProfileOrderHistory orders={user.translations}></ProfileOrderHistory>
         </>
         
     )

@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Love+Ya+Like+A+Sister&family=Sanchez&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Love+Ya+Like+A+Sister&family=Sanchez&display=swap');
+
+
+body{
+    font-family: 'Sanchez', serif;
+    color: white;
+}
+
+.App{
+    background-color: #FFC75F;
+    padding: 15px;
+}
+
+h1{
+    font-family: 'Love Ya Like A Sister', cursive;
+    width: 60%;
+    margin: auto;
+}
+button{
+    font-family: 'Sanchez', serif; 
+    background-color: #845EC2;
+    margin: 5px;
+    color: white;
+}
+input{
+    color:#969696;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 5px;
+    flex: 1;
+}
+
+.login-component{
+ width: 60%;
+margin: auto;
+}
+fieldset{
+    display: flex;
+}
