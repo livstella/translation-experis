@@ -1,7 +1,6 @@
 import { useForm } from "react-hook-form"
 import { useState } from "react"
-import { userById } from "../../api/user"
-import { useUser } from "../../context/UserContext"
+import { useLatestTranslation } from "../../context/LatestTranslationContext"
 
 const TranslationInputForm = ({translateHandler}) => {
 
@@ -16,14 +15,15 @@ const TranslationInputForm = ({translateHandler}) => {
     //handles showing the user that a translation is on the way
     const [translating, setTranslating] = useState(false)
 
-    //user state access from UserContext
-    const {user, setUser} = useUser()
+    //context for getting and setting just the latest translation
+    const {latestTranslation, setLatestTranslation} = useLatestTranslation()
 
     //passes translation input upwards to parent for use in the translateHandler prop function
     const onSubmit = async ({translationInput}) => {
         setTranslating(true)   
         await translateHandler(translationInput)
         setTranslating(false)
+        setLatestTranslation(translationInput) //flyt til translation view?
     }
 
     //render any user input errors to the screen. is called automatically on every re-render and then re-checks if any error messages exist.

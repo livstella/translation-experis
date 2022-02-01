@@ -12,8 +12,8 @@ export const orderAdd = async (user, newTranslation) => {
                 method: 'PATCH',
                 headers: createHeaders(),
                 body: JSON.stringify({
-                    //NN left orders here to avoid messing up the login page for now. remove them later
-                    orders: [...user.orders],
+                    // //NN left orders here to avoid messing up the login page for now. remove them later
+                    // orders: [...user.orders],
                     translations: [...user.translations, {
                         text: newTranslation,
                         isDeleted: false}],
