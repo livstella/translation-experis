@@ -46,12 +46,14 @@ const TranslationView = () => {
     
     //event handler for the order button in OrdersForm child. creates a complete order and http's it off
     const handleTranslateClicked = async translationInput => {
+        console.log('in view', translationInput)
+        console.log('user in view', user)
         // if (!coffee){
         //     alert('Please select a coffee')
         //     return
         // }
         const [error, updatedUser] = await orderAdd(user, translationInput)
-        console.log(updatedUser)
+        console.log(error, updatedUser)
         if (error !== null){
              return
         }

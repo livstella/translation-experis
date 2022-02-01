@@ -22,6 +22,7 @@ const TranslationInputForm = ({translateHandler}) => {
 
     //passes translation input upwards to parent for use in the translateHandler prop function
     const onSubmit = async ({translationInput}) => {
+        console.log(translationInput)
         setTranslating(true)   
         await translateHandler(translationInput)
         setTranslating(false)

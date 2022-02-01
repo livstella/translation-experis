@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useUser } from '../../context/UserContext';
-import TranslationImageComponent from './TranslationImageComponent';
 import { useEffect } from 'react';
+import { useLatestTranslation } from '../../context/LatestTranslationContext';
 
 
 
@@ -9,7 +9,8 @@ const TranslationOutput = () => {
   
     //context for getting and setting the latest translation
     const {user, setUser} = useUser()
-    let userInput = user.translations.slice(-1)[0].text
+    const {latestTranslation, setLatestTranslation} = useLatestTranslation()
+    let userInput = latestTranslation
 
     const imageNames = []
     const [images, setImages] = useState(['one'])

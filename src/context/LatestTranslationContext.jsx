@@ -16,8 +16,13 @@ const LatestTranslationProvider = ({children}) => { // <- this is children objec
     //sets last translation to what is recorded in session storage user account
     //consider getting this from the API instead
     const getLastTranslation = () => {
-        return storageRead(STORAGE_KEY_USER).translations.slice(-1)[0]
+        const currentUser = storageRead(STORAGE_KEY_USER)
+        if (currentUser){
+            return currentUser.translations.slice(-1)[0]
+        }
+        return ''     
     }
+    
     const [latestTranslation, setLatestTranslation] = useState(getLastTranslation())
 
     const state = {
