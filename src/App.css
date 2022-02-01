@@ -20,6 +20,8 @@ h1{
 button{
     font-family: 'Sanchez', serif; 
     background-color: #845EC2;
+    margin: 5px;
+    color: white;
 }
 input{
     color:#969696;
