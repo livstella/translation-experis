@@ -31,7 +31,7 @@ const TranslationOutput = () => {
     }
 
     return <div>
-        <button onClick={translate}>TEST TRANSLATE</button>
+        <button onClick={translate}>TEST TRANSLATE IN OUTPUT COMP</button>
       <h2>Your text in American sign language:</h2>
       {images}
   </div>;

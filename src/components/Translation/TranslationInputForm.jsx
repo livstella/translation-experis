@@ -23,7 +23,7 @@ const TranslationInputForm = ({translateHandler}) => {
         setTranslating(true)   
         await translateHandler(translationInput)
         setTranslating(false)
-        setLatestTranslation(translationInput)
+        setLatestTranslation(translationInput) //flyt til translation view?
     }
 
     //render any user input errors to the screen. is called automatically on every re-render and then re-checks if any error messages exist.

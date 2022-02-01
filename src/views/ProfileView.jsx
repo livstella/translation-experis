@@ -23,7 +23,6 @@ const ProfileView = () => {
             if (error === null){
                 storageSave(STORAGE_KEY_USER, latestUser)
                 setUser(latestUser)
-                
             }
         }
 
